@@ -1,6 +1,7 @@
 from pathlib import Path, os
 from dotenv import load_dotenv
-
+from decouple import config
+from dj_database_url import parse as dburl
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,9 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['manutencao-clientes.herokuapp.com']
 
 
 # Application definition
@@ -61,12 +62,12 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+default_dburl = 'sqlite:///'+ os.path.join(BASE_DIR, 'db.sqlite')
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
+
 
 
 # Password validation
@@ -104,6 +105,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
