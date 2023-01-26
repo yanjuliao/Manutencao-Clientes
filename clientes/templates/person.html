@@ -12,6 +12,7 @@
 
             <li>
                 <a href="{% url 'person_update' person.id %}">{{ person }}</a>
+                <br>
                 <a href="{% url 'person_delete' person.id %}">Deletar</a>
             </li>
 
@@ -20,5 +21,7 @@
     <br> 
 
     <a href="{% url 'person_new' %}">Cadastrar novo cliente</a>
+    <br>
+    <a href="{% url 'logout' %}">Sair</a>
 </body>
 </html>
