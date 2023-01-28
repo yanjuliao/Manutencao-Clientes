@@ -1,1 +1,1 @@
-web: gunicorn manutencao-clientes.wsgi
+web: gunicorn MANUTENCAO-CLIENTES.wsgi
