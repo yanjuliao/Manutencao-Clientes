@@ -1,1 +1,1 @@
-web: gunicorn MANUTENCAO-CLIENTES.wsgi --log-file -
+web: gunicorn --chdir MANUTENCAO-CLIENTES MANUTENCAO-CLIENTES.wsgi
