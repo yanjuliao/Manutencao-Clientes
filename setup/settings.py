@@ -12,7 +12,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['manutencao-clientes.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -59,13 +59,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'setup.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-default_dburl = 'sqlite:///'+ os.path.join(BASE_DIR, 'db.sqlite')
 
 DATABASES = {
-    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'BD01'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASS', str(os.getenv('DB_PASS'))),
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
 
 
