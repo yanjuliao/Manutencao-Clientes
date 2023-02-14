@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Deletar Cliente{% endblock %}
+{% block main %}
     <h1>Tem certeza que deseja deletar {{ person }}?</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <button type="submit">Sim</button>
-        <button type="reset"><a href="{% url 'person_list' %}" style="text-decoration:none; color:inherit">Não</a></button>
-    </form>
-</body>
-</html>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sim</button>
+            <button type="reset" class="btn btn-outline-primary"><a href="{% url 'person_list' %}" style="text-decoration:none; color:inherit">Não</a></button>
+        </form>    
+{% endblock %}
